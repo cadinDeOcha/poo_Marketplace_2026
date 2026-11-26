@@ -1,0 +1,17 @@
+services:
+  marketplace:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    image: mini-marketplace:1.0
+
+    container_name: mini-marketplace
+
+    ports:
+      - "127.0.0.1:6080:6080"
+
+    environment:
+      DISPLAY: ":99"
+
+    init: true
