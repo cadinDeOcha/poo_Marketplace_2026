@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1">
+
+    <top>
+        <HBox alignment="CENTER_LEFT"
+              spacing="20"
+              styleClass="cabecalho">
+
+            <padding>
+                <Insets top="18" right="35" bottom="18" left="35"/>
+            </padding>
+
+            <Label text="MINI MARKETPLACE"
+                   styleClass="logo"/>
+
+            <HBox HBox.hgrow="ALWAYS"/>
+
+            <Button fx:id="lblQuantidadeCarrinho"
+                    text="Carrinho (0)"
+                    styleClass="botao-carrinho"
+                    onAction="#abrirCarrinho"/>
+        </HBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true"
+                    styleClass="scroll-catalogo">
+
+            <content>
+                <VBox spacing="22"
+                      styleClass="conteudo-catalogo">
+
+                    <padding>
+                        <Insets top="30" right="35"
+                                bottom="40" left="35"/>
+                    </padding>
+
+                    <!-- APRESENTAÇÃO -->
+                    <VBox spacing="6">
+                        <Label text="Encontre seus produtos"
+                               styleClass="titulo"/>
+
+                        <Label text="Sua loja de produtos em um só lugar."
+                               styleClass="subtitulo"/>
+                    </VBox>
+
+                    <!-- PESQUISA -->
+                    <TextField fx:id="campoPesquisa"
+                               promptText="Pesquisar produtos..."
+                               styleClass="campo-pesquisa"/>
+
+                    <!-- CATEGORIAS -->
+                    <VBox spacing="12">
+
+                        <Label text="Categorias"
+                               styleClass="titulo-secao"/>
+
+                        <HBox spacing="10">
+
+                            <Button fx:id="btnTodos"
+                                    text="Todos"
+                                    onAction="#filtrarTodos"
+                                    styleClass="botao-categoria"/>
+
+                            <Button fx:id="btnEletronicos"
+                                    text="Eletrônicos"
+                                    onAction="#filtrarEletronicos"
+                                    styleClass="botao-categoria"/>
+
+                            <Button fx:id="btnInformatica"
+                                    text="Informática"
+                                    onAction="#filtrarInformatica"
+                                    styleClass="botao-categoria"/>
+
+                            <Button fx:id="btnGames"
+                                    text="Games"
+                                    onAction="#filtrarGames"
+                                    styleClass="botao-categoria"/>
+
+                            <Button fx:id="btnAcessorios"
+                                    text="Acessórios"
+                                    onAction="#filtrarAcessorios"
+                                    styleClass="botao-categoria"/>
+
+                        </HBox>
+                    </VBox>
+
+                    <!-- DESTAQUES -->
+                    <VBox spacing="14">
+
+                        <HBox alignment="CENTER_LEFT"
+                              spacing="12">
+
+                            <Label text="Produtos em destaque"
+                                   styleClass="titulo-secao"/>
+
+                            <HBox HBox.hgrow="ALWAYS"/>
+
+                            <Button text="‹"
+                                    onAction="#destaqueAnterior"
+                                    styleClass="botao-carrossel"/>
+
+                            <Button text="›"
+                                    onAction="#proximoDestaque"
+                                    styleClass="botao-carrossel"/>
+
+                        </HBox>
+
+                        <HBox fx:id="painelDestaques"
+                              spacing="18"
+                              alignment="CENTER_LEFT"/>
+
+                    </VBox>
+
+                    <!-- TODOS OS PRODUTOS -->
+                    <VBox spacing="14">
+
+                        <HBox alignment="CENTER_LEFT">
+
+                            <Label text="Todos os produtos"
+                                   styleClass="titulo-secao"/>
+
+                            <HBox HBox.hgrow="ALWAYS"/>
+
+                            <Label fx:id="lblQuantidadeProdutos"
+                                   text="12 produtos encontrados"
+                                   styleClass="texto-quantidade"/>
+
+                        </HBox>
+
+                        <Label fx:id="lblEstadoProdutos"
+                               text="Nenhum produto encontrado."
+                               visible="false"
+                               managed="false"
+                               styleClass="mensagem-vazia"/>
+
+                        <FlowPane fx:id="painelProdutos"
+                                  hgap="18"
+                                  vgap="18"
+                                  prefWrapLength="714"
+                                  maxWidth="714"
+                                  alignment="TOP_LEFT"/>
+
+                    </VBox>
+
+                </VBox>
+            </content>
+
+        </ScrollPane>
+    </center>
+
+</BorderPane>

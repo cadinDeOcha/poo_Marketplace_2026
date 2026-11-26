@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane
+    xmlns="http://javafx.com/javafx/21"
+    xmlns:fx="http://javafx.com/fxml/1"
+    styleClass="detalhes-pagina">
+
+    <!-- CABEÇALHO -->
+
+    <top>
+        <HBox alignment="CENTER_LEFT"
+              spacing="20"
+              styleClass="detalhes-cabecalho">
+
+            <padding>
+                <Insets top="20" right="30"
+                        bottom="20" left="30"/>
+            </padding>
+
+            <Label text="MINI MARKETPLACE"
+                   styleClass="detalhes-logo"/>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Button fx:id="lblQuantidadeCarrinho"
+                   text="Carrinho (0)"
+                   styleClass="detalhes-indicador"
+                   onAction="#abrirCarrinho"/>
+
+        </HBox>
+    </top>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+
+    <center>
+
+        <ScrollPane fitToWidth="true"
+                    fitToHeight="true"
+                    styleClass="detalhes-scroll">
+
+            <content>
+
+                <VBox spacing="25"
+                      alignment="TOP_CENTER">
+
+                    <padding>
+                        <Insets top="30" right="35"
+                                bottom="35" left="35"/>
+                    </padding>
+
+                    <!-- BOTÃO VOLTAR -->
+
+                    <HBox maxWidth="1100"
+                          alignment="CENTER_LEFT">
+
+                        <Button text="← Voltar ao catálogo"
+                                onAction="#voltarAoCatalogo"
+                                styleClass="botao-voltar"/>
+
+                    </HBox>
+
+                    <!-- CARD DE DETALHES -->
+
+                    <HBox spacing="35"
+                          alignment="CENTER"
+                          maxWidth="1100"
+                          styleClass="detalhes-card">
+
+                        <padding>
+                            <Insets top="35" right="35"
+                                    bottom="35" left="35"/>
+                        </padding>
+
+                        <!-- IMAGEM -->
+
+                        <StackPane prefWidth="340"
+                                   prefHeight="380"
+                                   minWidth="260"
+                                   styleClass="detalhes-imagem">
+
+                            <Label fx:id="lblImagemIndisponivel"
+                                   text="Imagem indisponível"
+                                   styleClass="detalhes-imagem-texto"/>
+
+                            <ImageView fx:id="imagemProduto"
+                                       fitWidth="300"
+                                       fitHeight="340"
+                                       preserveRatio="true"
+                                       smooth="true"/>
+
+                        </StackPane>
+
+                        <!-- INFORMAÇÕES -->
+
+                        <VBox spacing="18"
+                              alignment="CENTER_LEFT"
+                              HBox.hgrow="ALWAYS">
+
+                            <Label fx:id="lblCategoria"
+                                   styleClass="detalhes-categoria"/>
+
+                            <Label fx:id="lblNome"
+                                   wrapText="true"
+                                   styleClass="detalhes-nome"/>
+
+                            <Label fx:id="lblPreco"
+                                   styleClass="detalhes-preco"/>
+
+                            <Separator/>
+
+                            <Label text="Descrição do produto"
+                                   styleClass="detalhes-subtitulo"/>
+
+                            <Label fx:id="lblDescricao"
+                                   wrapText="true"
+                                   maxWidth="500"
+                                   styleClass="detalhes-descricao"/>
+
+                            <Button text="Adicionar ao carrinho"
+                                    onAction="#adicionarAoCarrinho"
+                                    maxWidth="Infinity"
+                                    styleClass="detalhes-botao-adicionar"/>
+
+                            <Label fx:id="lblMensagem"
+                                   wrapText="true"
+                                   styleClass="detalhes-mensagem"/>
+
+                        </VBox>
+
+                    </HBox>
+
+                </VBox>
+
+            </content>
+
+        </ScrollPane>
+
+    </center>
+
+</BorderPane>

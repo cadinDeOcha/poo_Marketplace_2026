@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            styleClass="tela-carrinho"
+            prefWidth="1100"
+            prefHeight="700">
+
+    <!-- ========================= -->
+    <!-- CABEÇALHO                 -->
+    <!-- ========================= -->
+
+    <top>
+
+        <HBox alignment="CENTER_LEFT"
+              spacing="20"
+              styleClass="carrinho-cabecalho">
+
+            <padding>
+                <Insets top="20"
+                        right="32"
+                        bottom="20"
+                        left="32"/>
+            </padding>
+
+            <Label text="MINI MARKETPLACE"
+                   styleClass="carrinho-logo"/>
+
+            <Region HBox.hgrow="ALWAYS"/>
+
+            <Label fx:id="lblQuantidadeCarrinho"
+                   text="Carrinho (0)"
+                   styleClass="carrinho-indicador"/>
+
+        </HBox>
+
+    </top>
+
+    <!-- ========================= -->
+    <!-- CONTEÚDO PRINCIPAL        -->
+    <!-- ========================= -->
+
+    <center>
+
+        <ScrollPane fitToWidth="true"
+                    hbarPolicy="NEVER"
+                    styleClass="carrinho-scroll">
+
+            <content>
+
+                <VBox alignment="TOP_CENTER">
+
+                    <padding>
+                        <Insets top="30"
+                                right="32"
+                                bottom="40"
+                                left="32"/>
+                    </padding>
+
+                    <VBox spacing="24"
+                          maxWidth="1000">
+
+                        <!-- VOLTAR AO CATÁLOGO -->
+
+                        <Button text="← Voltar ao catálogo"
+                                onAction="#voltarCatalogo"
+                                styleClass="carrinho-botao-voltar"/>
+
+                        <!-- TÍTULO -->
+
+                        <VBox spacing="6">
+
+                            <Label text="Meu carrinho"
+                                   styleClass="carrinho-titulo"/>
+
+                            <Label
+                                text="Gerencie os produtos adicionados ao seu carrinho."
+                                styleClass="carrinho-subtitulo"
+                                wrapText="true"/>
+
+                        </VBox>
+
+                        <!-- LISTA DINÂMICA DE ITENS -->
+
+                        <VBox fx:id="painelItens"
+                              spacing="14"
+                              visible="false"
+                              managed="false"/>
+
+                        <!-- CARRINHO VAZIO -->
+
+                        <VBox fx:id="painelCarrinhoVazio"
+                              alignment="CENTER"
+                              spacing="12"
+                              minHeight="220"
+                              styleClass="carrinho-vazio">
+
+                            <padding>
+                                <Insets top="32"
+                                        right="24"
+                                        bottom="32"
+                                        left="24"/>
+                            </padding>
+
+                            <Label
+                                text="Seu carrinho está vazio"
+                                styleClass="carrinho-vazio-titulo"/>
+
+                            <Label
+                                text="Adicione produtos ao carrinho para visualizá-los aqui."
+                                styleClass="carrinho-subtitulo"
+                                wrapText="true"
+                                textAlignment="CENTER"/>
+
+                        </VBox>
+
+                        <!-- RESUMO DO CARRINHO -->
+
+                        <VBox spacing="20"
+                              styleClass="carrinho-resumo">
+
+                            <padding>
+                                <Insets top="24"
+                                        right="24"
+                                        bottom="24"
+                                        left="24"/>
+                            </padding>
+
+                            <Label text="Resumo do carrinho"
+                                   styleClass="carrinho-resumo-titulo"/>
+
+                            <!-- QUANTIDADE -->
+
+                            <HBox alignment="CENTER_LEFT">
+
+                                <Label
+                                    text="Quantidade de produtos"
+                                    styleClass="carrinho-subtitulo"/>
+
+                                <Region HBox.hgrow="ALWAYS"/>
+
+                                <Label
+                                    fx:id="lblQuantidadeProdutos"
+                                    text="0 unidades"
+                                    styleClass="carrinho-quantidade"/>
+
+                            </HBox>
+
+                            <Separator/>
+
+                            <!-- TOTAL -->
+
+                            <HBox alignment="CENTER_LEFT">
+
+                                <Label text="Total"
+                                       styleClass="carrinho-total-titulo"/>
+
+                                <Region HBox.hgrow="ALWAYS"/>
+
+                                <Label fx:id="lblTotal"
+                                       text="R$ 0,00"
+                                       styleClass="carrinho-total"/>
+
+                            </HBox>
+
+                            <!-- CONTINUAR COMPRANDO -->
+
+                            <Button
+                                text="Continuar comprando"
+                                onAction="#voltarCatalogo"
+                                maxWidth="Infinity"
+                                styleClass="carrinho-botao-principal"/>
+
+                        </VBox>
+
+                    </VBox>
+
+                </VBox>
+
+            </content>
+
+        </ScrollPane>
+
+    </center>
+
+</BorderPane>

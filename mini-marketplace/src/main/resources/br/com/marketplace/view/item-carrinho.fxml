@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+
+<HBox xmlns="http://javafx.com/javafx/21"
+       xmlns:fx="http://javafx.com/fxml/1"
+       fx:controller="br.com.marketplace.controller.ItemCarrinhoController"
+       alignment="CENTER_LEFT"
+       spacing="20"
+       styleClass="item-carrinho">
+
+       <padding>
+              <Insets top="18"
+                     right="24"
+                     bottom="18"
+                     left="18" />
+       </padding>
+
+       <!-- ========================= -->
+       <!-- IMAGEM DO PRODUTO         -->
+       <!-- ========================= -->
+
+       <StackPane prefWidth="120"
+              prefHeight="110"
+              minWidth="120"
+              minHeight="110"
+              maxWidth="120"
+              maxHeight="110"
+              styleClass="item-carrinho-imagem">
+
+              <ImageView fx:id="imgProduto"
+                     fitWidth="110"
+                     fitHeight="100"
+                     preserveRatio="true"
+                     smooth="true"
+                     visible="false" />
+
+              <Label fx:id="lblImagemIndisponivel"
+                     text="Imagem indisponível"
+                     wrapText="true"
+                     textAlignment="CENTER"
+                     styleClass="item-carrinho-sem-imagem" />
+
+       </StackPane>
+
+       <!-- ========================= -->
+       <!-- INFORMAÇÕES DO PRODUTO    -->
+       <!-- ========================= -->
+
+       <VBox spacing="6"
+              alignment="CENTER_LEFT"
+              HBox.hgrow="ALWAYS">
+
+              <Label fx:id="lblNome"
+                     text="Nome do produto"
+                     wrapText="true"
+                     styleClass="item-carrinho-nome" />
+
+              <Label fx:id="lblCategoria"
+                     text="Categoria"
+                     styleClass="item-carrinho-categoria" />
+
+              <Label text="Preço unitário"
+                     styleClass="item-carrinho-rotulo" />
+
+              <Label fx:id="lblPrecoUnitario"
+                     text="R$ 0,00"
+                     styleClass="item-carrinho-preco" />
+
+       </VBox>
+
+       <!-- ========================= -->
+       <!-- QUANTIDADE                -->
+       <!-- ========================= -->
+
+       <VBox alignment="CENTER"
+              spacing="8"
+              minWidth="100">
+
+              <Label text="Quantidade"
+                     styleClass="item-carrinho-rotulo" />
+
+              <HBox spacing="10" alignment="CENTER_LEFT">
+
+                     <Button
+                            fx:id="btnDiminuir"
+                            text="-"
+                            onAction="#diminuirQuantidade"
+                            styleClass="botao-quantidade" />
+
+                     <Label
+                            fx:id="lblQuantidade"
+                            styleClass="quantidade-item" />
+
+                     <Button
+                            text="+"
+                            onAction="#aumentarQuantidade"
+                            styleClass="botao-quantidade" />
+
+              </HBox>
+
+       </VBox>
+
+       <!-- ========================= -->
+       <!-- SUBTOTAL                  -->
+       <!-- ========================= -->
+
+       <VBox alignment="CENTER_RIGHT"
+              spacing="8"
+              minWidth="140">
+
+              <Label text="Subtotal"
+                     styleClass="item-carrinho-rotulo" />
+
+              <Label fx:id="lblSubtotal"
+                     text="R$ 0,00"
+                     styleClass="item-carrinho-subtotal" />
+
+              <Button
+                     text="Remover"
+                     onAction="#removerProduto"
+                     styleClass="botao-remover" />
+
+       </VBox>
+
+</HBox>
