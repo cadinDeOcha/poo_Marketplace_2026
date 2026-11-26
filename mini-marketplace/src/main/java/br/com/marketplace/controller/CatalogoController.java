@@ -5,21 +5,31 @@ import br.com.marketplace.model.Produto;
 import br.com.marketplace.service.CarrinhoService;
 import br.com.marketplace.service.ProdutoService;
 import br.com.marketplace.util.NavegacaoUtil;
+import br.com.marketplace.util.AlertaUtil;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
+import javafx.scene.image.ImageView;
+import javafx.beans.binding.Bindings;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CatalogoController {
+
+    private static final Logger LOGGER = Logger.getLogger(CatalogoController.class.getName());
+
+    private static final int COLUNAS_CATALOGO = 3;
+    private static final int DESTAQUES_VISIVEIS = 3;
 
     private final ProdutoService produtoService;
     private final CarrinhoService carrinhoService;
@@ -28,10 +38,10 @@ public class CatalogoController {
     private TextField campoPesquisa;
 
     @FXML
-    private FlowPane painelProdutos;
+    private GridPane painelProdutos;
 
     @FXML
-    private HBox painelDestaques;
+    private GridPane painelDestaques;
 
     @FXML
     private Button lblQuantidadeCarrinho;
@@ -112,9 +122,15 @@ public class CatalogoController {
         lblEstadoProdutos.setVisible(produtos.isEmpty());
         lblEstadoProdutos.setManaged(produtos.isEmpty());
 
-        for (Produto produto : produtos) {
-            painelProdutos.getChildren().add(
-                    criarCard(produto));
+        for (int i = 0; i < produtos.size(); i++) {
+
+            int coluna = i % COLUNAS_CATALOGO;
+            int linha = i / COLUNAS_CATALOGO;
+
+            painelProdutos.add(
+                    criarCard(produtos.get(i)),
+                    coluna,
+                    linha);
         }
     }
 
@@ -229,7 +245,9 @@ public class CatalogoController {
             return;
         }
 
-        int quantidade = Math.min(3, produtosDestaque.size());
+        int quantidade = Math.min(
+                DESTAQUES_VISIVEIS,
+                produtosDestaque.size());
 
         for (int i = 0; i < quantidade; i++) {
 
@@ -238,8 +256,7 @@ public class CatalogoController {
 
             Produto produto = produtosDestaque.get(indice);
 
-            painelDestaques.getChildren().add(
-                    criarCard(produto));
+            painelDestaques.add(criarCard(produto), i, 0);
         }
     }
 
@@ -256,19 +273,15 @@ public class CatalogoController {
 
         } catch (IOException e) {
 
-            Alert alerta = new Alert(
-                    Alert.AlertType.ERROR);
+            AlertaUtil.exibirErro(
+                    "Erro de navegação",
+                    "Não foi possível abrir o carrinho.",
+                    e.getMessage());
 
-            alerta.setTitle("Erro de navegação");
-
-            alerta.setHeaderText(
-                    "Não foi possível abrir o carrinho.");
-
-            alerta.setContentText(e.getMessage());
-
-            alerta.showAndWait();
-
-            e.printStackTrace();
+            LOGGER.log(
+                    Level.SEVERE,
+                    "Não foi possível abrir o carrinho.",
+                    e);
         }
     }
 
@@ -284,7 +297,11 @@ public class CatalogoController {
                     getClass().getResource(
                             "/br/com/marketplace/view/produto-card.fxml"));
 
-            Node card = loader.load();
+            Region card = loader.load();
+            // A imagem acompanha a largura do card, sem alterar a proporção.
+            StackPane container = (StackPane) loader.getNamespace().get("containerImagem");
+            ImageView imagem = (ImageView) loader.getNamespace().get("imagemProduto");
+            imagem.fitWidthProperty().bind(Bindings.max(0, container.widthProperty().subtract(12)));
 
             ProdutoCardController controller = loader.getController();
 
@@ -312,9 +329,6 @@ public class CatalogoController {
         carrinhoService.adicionarProduto(produto);
 
         atualizarIndicadorCarrinho();
-
-        System.out.println(
-                produto.getNome() + " adicionado ao carrinho.");
     }
 
     public void atualizarIndicadorCarrinho() {

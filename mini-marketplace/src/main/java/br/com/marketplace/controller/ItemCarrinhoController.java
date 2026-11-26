@@ -2,16 +2,15 @@ package br.com.marketplace.controller;
 
 import br.com.marketplace.model.ItemCarrinho;
 import br.com.marketplace.model.Produto;
+import br.com.marketplace.util.ImagemUtil;
 
 import br.com.marketplace.service.CarrinhoService;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
 
-import java.net.URL;
 import java.text.NumberFormat;
 import java.util.Locale;
 
@@ -37,8 +36,6 @@ public class ItemCarrinhoController {
 
         @FXML
         private Label lblSubtotal;
-
-        private ItemCarrinho item;
 
         private final NumberFormat formatoMoeda = NumberFormat.getCurrencyInstance(
                         Locale.of("pt", "BR"));
@@ -100,8 +97,6 @@ public class ItemCarrinhoController {
 
         public void configurarItem(ItemCarrinho item) {
 
-                this.item = item;
-
                 Produto produto = item.getProduto();
 
                 lblNome.setText(produto.getNome());
@@ -127,31 +122,10 @@ public class ItemCarrinhoController {
 
         private void carregarImagem(String caminhoImagem) {
 
-                imgProduto.setImage(null);
-                imgProduto.setVisible(false);
-                lblImagemIndisponivel.setVisible(true);
-
-                if (caminhoImagem == null ||
-                                caminhoImagem.isBlank()) {
-                        return;
-                }
-
-                URL recurso = getClass().getResource(caminhoImagem);
-
-                if (recurso != null) {
-
-                        Image imagem = new Image(
-                                        recurso.toExternalForm());
-
-                        if (!imagem.isError()) {
-
-                                imgProduto.setImage(imagem);
-
-                                imgProduto.setVisible(true);
-
-                                lblImagemIndisponivel.setVisible(false);
-                        }
-                }
+                ImagemUtil.carregarImagem(
+                                caminhoImagem,
+                                imgProduto,
+                                lblImagemIndisponivel);
         }
 
         public void configurarAcoes(

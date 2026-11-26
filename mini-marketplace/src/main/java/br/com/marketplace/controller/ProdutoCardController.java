@@ -4,22 +4,27 @@ import br.com.marketplace.model.Produto;
 
 import br.com.marketplace.util.NavegacaoUtil;
 
-import javafx.scene.control.Alert;
+import br.com.marketplace.util.AlertaUtil;
+
+import br.com.marketplace.util.ImagemUtil;
 
 import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.function.Consumer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ProdutoCardController {
+
+    private static final Logger LOGGER = Logger.getLogger(ProdutoCardController.class.getName());
 
     @FXML
     private Label lblNome;
@@ -53,8 +58,7 @@ public class ProdutoCardController {
         lblNome.setText(produto.getNome());
 
         lblCategoria.setText(
-                produto.getCategoria().getNomeExibicao()
-        );
+                produto.getCategoria().getNomeExibicao());
 
         lblPreco.setText(formatarPreco(produto.getPreco()));
 
@@ -64,30 +68,17 @@ public class ProdutoCardController {
     private String formatarPreco(BigDecimal preco) {
 
         NumberFormat formato = NumberFormat.getCurrencyInstance(
-                new Locale("pt", "BR")
-        );
+                Locale.of("pt", "BR"));
 
         return formato.format(preco);
     }
 
     private void carregarImagem(String caminhoImagem) {
 
-        var recurso = getClass().getResource(caminhoImagem);
-
-        if (recurso != null) {
-
-            imagemProduto.setImage(
-                    new Image(recurso.toExternalForm())
-            );
-
-            imagemProduto.setVisible(true);
-            lblImagemIndisponivel.setVisible(false);
-
-        } else {
-
-            imagemProduto.setVisible(false);
-            lblImagemIndisponivel.setVisible(true);
-        }
+        ImagemUtil.carregarImagem(
+                caminhoImagem,
+                imagemProduto,
+                lblImagemIndisponivel);
     }
 
     @FXML
@@ -115,21 +106,15 @@ public class ProdutoCardController {
 
         } catch (IOException e) {
 
-            Alert alerta = new Alert(
-                    Alert.AlertType.ERROR
-            );
+            LOGGER.log(
+                    Level.SEVERE,
+                    "Não foi possível abrir os detalhes do produto.",
+                    e);
 
-            alerta.setTitle("Erro de navegação");
-
-            alerta.setHeaderText(
-                    "Não foi possível abrir os detalhes do produto."
-            );
-
-            alerta.setContentText(e.getMessage());
-
-            alerta.showAndWait();
-
-            e.printStackTrace();
+            AlertaUtil.exibirErro(
+                    "Erro de navegação",
+                    "Não foi possível abrir os detalhes do produto.",
+                    e.getMessage());
         }
     }
 

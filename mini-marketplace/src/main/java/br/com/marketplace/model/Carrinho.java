@@ -17,8 +17,15 @@ public class Carrinho {
 
         if (item == null) {
             throw new IllegalArgumentException(
-                    "O item não pode ser nulo."
-            );
+                    "O item não pode ser nulo.");
+        }
+
+        boolean produtoExistente = itens.stream()
+                .anyMatch(itemExistente -> itemExistente.getProduto().getId() == item.getProduto().getId());
+
+        if (produtoExistente) {
+            throw new IllegalArgumentException(
+                    "O produto já está presente no carrinho.");
         }
 
         itens.add(item);
@@ -27,8 +34,7 @@ public class Carrinho {
     public boolean removerItem(int idProduto) {
 
         return itens.removeIf(
-                item -> item.getProduto().getId() == idProduto
-        );
+                item -> item.getProduto().getId() == idProduto);
     }
 
     public List<ItemCarrinho> getItens() {

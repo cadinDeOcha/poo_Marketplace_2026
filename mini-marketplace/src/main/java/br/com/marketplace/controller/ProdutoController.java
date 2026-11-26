@@ -3,27 +3,30 @@ package br.com.marketplace.controller;
 import br.com.marketplace.model.Produto;
 import br.com.marketplace.service.CarrinhoService;
 import br.com.marketplace.util.NavegacaoUtil;
+import br.com.marketplace.util.AlertaUtil;
+import br.com.marketplace.util.ImagemUtil;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
-import javafx.scene.control.Alert;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.io.IOException;
-import java.net.URL;
 import java.text.NumberFormat;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ProdutoController {
+
+    private static final Logger LOGGER = Logger.getLogger(ProdutoController.class.getName());
 
     private final Produto produto;
 
     private final CarrinhoService carrinhoService;
 
     private final NumberFormat formatoMoeda = NumberFormat.getCurrencyInstance(
-            Locale.forLanguageTag("pt-BR"));
+            Locale.of("pt", "BR"));
 
     @FXML
     private ImageView imagemProduto;
@@ -87,35 +90,19 @@ public class ProdutoController {
 
         lblDescricao.setText(produto.getDescricao());
 
-        carregarImagem();
+        carregarImagem(produto.getCaminhoImagem());
     }
 
     // =============================
     // IMAGEM DO PRODUTO
     // =============================
 
-    private void carregarImagem() {
+    private void carregarImagem(String caminhoImagem) {
 
-        imagemProduto.setVisible(false);
-        lblImagemIndisponivel.setVisible(true);
-
-        URL caminhoImagem = getClass().getResource(
-                produto.getCaminhoImagem());
-
-        if (caminhoImagem != null) {
-
-            Image imagem = new Image(
-                    caminhoImagem.toExternalForm());
-
-            if (!imagem.isError()) {
-
-                imagemProduto.setImage(imagem);
-
-                imagemProduto.setVisible(true);
-
-                lblImagemIndisponivel.setVisible(false);
-            }
-        }
+        ImagemUtil.carregarImagem(
+                caminhoImagem,
+                imagemProduto,
+                lblImagemIndisponivel);
     }
 
     // =============================
@@ -157,19 +144,15 @@ public class ProdutoController {
 
         } catch (IOException e) {
 
-            Alert alerta = new Alert(
-                    Alert.AlertType.ERROR);
+            LOGGER.log(
+                    Level.SEVERE,
+                    "Não foi possível abrir o carrinho.",
+                    e);
 
-            alerta.setTitle("Erro de navegação");
-
-            alerta.setHeaderText(
-                    "Não foi possível abrir o carrinho.");
-
-            alerta.setContentText(e.getMessage());
-
-            alerta.showAndWait();
-
-            e.printStackTrace();
+            AlertaUtil.exibirErro(
+                    "Erro de navegação",
+                    "Não foi possível abrir o carrinho.",
+                    e.getMessage());
         }
     }
 
@@ -186,17 +169,15 @@ public class ProdutoController {
 
         } catch (IOException e) {
 
-            Alert alerta = new Alert(
-                    Alert.AlertType.ERROR);
+            LOGGER.log(
+                    Level.SEVERE,
+                    "Não foi possível abrir o catálogo.",
+                    e);
 
-            alerta.setTitle("Erro de navegação");
-
-            alerta.setHeaderText(
-                    "Não foi possível abrir o catálogo.");
-
-            alerta.setContentText(e.getMessage());
-
-            alerta.showAndWait();
+            AlertaUtil.exibirErro(
+                    "Erro de navegação",
+                    "Não foi possível abrir o catálogo.",
+                    e.getMessage());
         }
     }
 }

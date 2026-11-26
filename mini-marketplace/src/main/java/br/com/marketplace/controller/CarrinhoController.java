@@ -3,11 +3,11 @@ package br.com.marketplace.controller;
 import br.com.marketplace.model.ItemCarrinho;
 import br.com.marketplace.service.CarrinhoService;
 import br.com.marketplace.util.NavegacaoUtil;
+import br.com.marketplace.util.AlertaUtil;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
@@ -15,8 +15,12 @@ import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.List;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CarrinhoController {
+
+    private static final Logger LOGGER = Logger.getLogger(CarrinhoController.class.getName());
 
     private final CarrinhoService carrinhoService;
 
@@ -175,17 +179,15 @@ public class CarrinhoController {
             String mensagem,
             Exception e) {
 
-        Alert alerta = new Alert(
-                Alert.AlertType.ERROR);
+        LOGGER.log(
+                Level.SEVERE,
+                mensagem,
+                e);
 
-        alerta.setTitle("Erro");
-
-        alerta.setHeaderText(mensagem);
-
-        alerta.setContentText(e.getMessage());
-
-        alerta.showAndWait();
-
-        e.printStackTrace();
+        AlertaUtil.exibirErro(
+                "Erro",
+                mensagem,
+                e.getMessage());
     }
+
 }

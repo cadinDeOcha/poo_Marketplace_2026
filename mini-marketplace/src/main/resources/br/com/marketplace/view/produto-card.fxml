@@ -8,56 +8,59 @@
 <?import javafx.scene.layout.StackPane?>
 
 <VBox xmlns="http://javafx.com/javafx/21"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="br.com.marketplace.controller.ProdutoCardController"
-      alignment="CENTER"
-      spacing="8"
-      prefWidth="220"
-      styleClass="produto-card">
+       xmlns:fx="http://javafx.com/fxml/1"
+       fx:controller="br.com.marketplace.controller.ProdutoCardController"
+       alignment="CENTER"
+       spacing="8"
+       prefWidth="220"
+       minWidth="0"
+       maxWidth="Infinity"
+       styleClass="produto-card">
 
-    <padding>
-        <Insets top="12" right="12" bottom="12" left="12"/>
-    </padding>
+       <padding>
+              <Insets top="12" right="12" bottom="12" left="12" />
+       </padding>
 
-    <StackPane prefHeight="145" maxWidth="Infinity"
-               styleClass="produto-imagem-container">
+       <StackPane fx:id="containerImagem" prefHeight="170" minHeight="170" maxHeight="170"
+              minWidth="0" maxWidth="Infinity"
+              styleClass="produto-imagem-container">
 
-        <ImageView fx:id="imagemProduto"
-                   fitWidth="190"
-                   fitHeight="135"
-                   preserveRatio="true"/>
+              <ImageView fx:id="imagemProduto"
+                     fitWidth="190"
+                     fitHeight="160"
+                     preserveRatio="true" smooth="true" />
 
-        <Label fx:id="lblImagemIndisponivel"
-               text="Imagem indisponível"
-               styleClass="imagem-placeholder"
-               visible="true"/>
-    </StackPane>
+              <Label fx:id="lblImagemIndisponivel"
+                     text="Imagem indisponível"
+                     styleClass="imagem-placeholder"
+                     visible="true" />
+       </StackPane>
 
-    <Label fx:id="lblNome"
-           text="Nome do produto"
-           maxWidth="Infinity"
-           wrapText="true"
-           styleClass="produto-nome"/>
+       <Label fx:id="lblNome"
+              text="Nome do produto"
+              maxWidth="Infinity"
+              wrapText="true"
+              styleClass="produto-nome" />
 
-    <Label fx:id="lblCategoria"
-           text="Categoria"
-           maxWidth="Infinity"
-           styleClass="produto-categoria"/>
+       <Label fx:id="lblCategoria"
+              text="Categoria"
+              maxWidth="Infinity"
+              styleClass="produto-categoria" />
 
-    <Label fx:id="lblPreco"
-           text="R$ 0,00"
-           maxWidth="Infinity"
-           styleClass="produto-preco"/>
+       <Label fx:id="lblPreco"
+              text="R$ 0,00"
+              maxWidth="Infinity"
+              styleClass="produto-preco" />
 
-    <Button text="Ver detalhes"
-           onAction="#verDetalhes"
-           maxWidth="Infinity"
-           styleClass="botao-ver-detalhes"/>
+       <Button text="Ver detalhes"
+              onAction="#verDetalhes"
+              maxWidth="Infinity"
+              styleClass="botao-ver-detalhes" />
 
-    <Button fx:id="btnAdicionar"
-            text="Adicionar ao carrinho"
-            maxWidth="Infinity"
-            onAction="#adicionarAoCarrinho"
-            styleClass="botao-adicionar"/>
+       <Button fx:id="btnAdicionar"
+              text="Adicionar ao carrinho"
+              maxWidth="Infinity"
+              onAction="#adicionarAoCarrinho"
+              styleClass="botao-adicionar" />
 
 </VBox>

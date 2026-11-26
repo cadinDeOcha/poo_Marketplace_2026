@@ -3,6 +3,8 @@ package br.com.marketplace.service;
 import br.com.marketplace.model.Categoria;
 import br.com.marketplace.model.Produto;
 
+import java.util.Locale;
+
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
@@ -162,13 +164,13 @@ public class ProdutoService {
 
         String pesquisa = termo == null
                 ? ""
-                : termo.trim().toLowerCase();
+                : termo.trim().toLowerCase(Locale.ROOT);
 
         return produtos.stream()
 
                 .filter(produto ->
                     produto.getNome()
-                            .toLowerCase()
+                            .toLowerCase(Locale.ROOT)
                             .contains(pesquisa)
                 )
 

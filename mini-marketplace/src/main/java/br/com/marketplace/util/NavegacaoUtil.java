@@ -145,6 +145,6 @@ public class NavegacaoUtil {
 
         Parent telaCarrinho = loader.load();
 
-        scene.setRoot(telaCarrinho);
+        trocarTela(telaCarrinho);
     }
 }

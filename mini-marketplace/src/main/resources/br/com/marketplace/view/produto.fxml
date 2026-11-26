@@ -6,140 +6,145 @@
 <?import javafx.scene.layout.*?>
 
 <BorderPane
-    xmlns="http://javafx.com/javafx/21"
-    xmlns:fx="http://javafx.com/fxml/1"
-    styleClass="detalhes-pagina">
+       xmlns="http://javafx.com/javafx/21"
+       xmlns:fx="http://javafx.com/fxml/1"
+       styleClass="detalhes-pagina">
 
-    <!-- CABEÇALHO -->
+       <!-- CABEÇALHO -->
 
-    <top>
-        <HBox alignment="CENTER_LEFT"
-              spacing="20"
-              styleClass="detalhes-cabecalho">
+       <top>
+              <HBox alignment="CENTER_LEFT"
+                     spacing="20"
+                     styleClass="detalhes-cabecalho">
 
-            <padding>
-                <Insets top="20" right="30"
-                        bottom="20" left="30"/>
-            </padding>
+                     <padding>
+                            <Insets top="18" right="35" bottom="18" left="35" />
+                     </padding>
 
-            <Label text="MINI MARKETPLACE"
-                   styleClass="detalhes-logo"/>
+                     <Label text="MINI MARKETPLACE"
+                            styleClass="detalhes-logo" />
 
-            <Region HBox.hgrow="ALWAYS"/>
+                     <Region HBox.hgrow="ALWAYS" />
 
-            <Button fx:id="lblQuantidadeCarrinho"
-                   text="Carrinho (0)"
-                   styleClass="detalhes-indicador"
-                   onAction="#abrirCarrinho"/>
+                     <Button fx:id="lblQuantidadeCarrinho"
+                            text="Carrinho (0)"
+                            styleClass="detalhes-indicador"
+                            onAction="#abrirCarrinho" />
 
-        </HBox>
-    </top>
+              </HBox>
+       </top>
 
-    <!-- CONTEÚDO PRINCIPAL -->
+       <!-- CONTEÚDO PRINCIPAL -->
 
-    <center>
+       <center>
 
-        <ScrollPane fitToWidth="true"
-                    fitToHeight="true"
-                    styleClass="detalhes-scroll">
+              <ScrollPane fitToWidth="true"
+                     fitToHeight="false"
+                     hbarPolicy="NEVER"
+                     styleClass="detalhes-scroll">
 
-            <content>
+                     <content>
 
-                <VBox spacing="25"
-                      alignment="TOP_CENTER">
+                            <VBox spacing="25"
+                                   alignment="TOP_CENTER">
 
-                    <padding>
-                        <Insets top="30" right="35"
-                                bottom="35" left="35"/>
-                    </padding>
+                                   <padding>
+                                          <Insets top="30" right="35"
+                                                 bottom="35" left="35" />
+                                   </padding>
 
-                    <!-- BOTÃO VOLTAR -->
+                                   <!-- BOTÃO VOLTAR -->
 
-                    <HBox maxWidth="1100"
-                          alignment="CENTER_LEFT">
+                                   <HBox maxWidth="1100"
+                                          minWidth="0"
+                                          alignment="CENTER_LEFT">
 
-                        <Button text="← Voltar ao catálogo"
-                                onAction="#voltarAoCatalogo"
-                                styleClass="botao-voltar"/>
+                                          <Button text="← Voltar ao catálogo"
+                                                 onAction="#voltarAoCatalogo"
+                                                 styleClass="botao-voltar" />
 
-                    </HBox>
+                                   </HBox>
 
-                    <!-- CARD DE DETALHES -->
+                                   <!-- CARD DE DETALHES -->
 
-                    <HBox spacing="35"
-                          alignment="CENTER"
-                          maxWidth="1100"
-                          styleClass="detalhes-card">
+                                   <HBox spacing="24"
+                                          alignment="CENTER"
+                                          maxWidth="1100"
+                                          minWidth="0"
+                                          styleClass="detalhes-card">
 
-                        <padding>
-                            <Insets top="35" right="35"
-                                    bottom="35" left="35"/>
-                        </padding>
+                                          <padding>
+                                                 <Insets top="24" right="24"
+                                                        bottom="24" left="24" />
+                                          </padding>
 
-                        <!-- IMAGEM -->
+                                          <!-- IMAGEM -->
 
-                        <StackPane prefWidth="340"
-                                   prefHeight="380"
-                                   minWidth="260"
-                                   styleClass="detalhes-imagem">
+                                          <StackPane fx:id="painelImagemDetalhes" prefWidth="340"
+                                                 prefHeight="380"
+                                                 minWidth="240"
+                                                 maxWidth="360"
+                                                 HBox.hgrow="SOMETIMES"
+                                                 styleClass="detalhes-imagem">
 
-                            <Label fx:id="lblImagemIndisponivel"
-                                   text="Imagem indisponível"
-                                   styleClass="detalhes-imagem-texto"/>
+                                                 <Label fx:id="lblImagemIndisponivel"
+                                                        text="Imagem indisponível"
+                                                        styleClass="detalhes-imagem-texto" />
 
-                            <ImageView fx:id="imagemProduto"
-                                       fitWidth="300"
-                                       fitHeight="340"
-                                       preserveRatio="true"
-                                       smooth="true"/>
+                                                 <ImageView fx:id="imagemProduto"
+                                                        fitWidth="${painelImagemDetalhes.width - 24}"
+                                                        fitHeight="340"
+                                                        preserveRatio="true"
+                                                        smooth="true" />
 
-                        </StackPane>
+                                          </StackPane>
 
-                        <!-- INFORMAÇÕES -->
+                                          <!-- INFORMAÇÕES -->
 
-                        <VBox spacing="18"
-                              alignment="CENTER_LEFT"
-                              HBox.hgrow="ALWAYS">
+                                          <VBox spacing="16"
+                                                 minWidth="0"
+                                                 alignment="CENTER_LEFT"
+                                                 HBox.hgrow="ALWAYS">
 
-                            <Label fx:id="lblCategoria"
-                                   styleClass="detalhes-categoria"/>
+                                                 <Label fx:id="lblCategoria"
+                                                        styleClass="detalhes-categoria" />
 
-                            <Label fx:id="lblNome"
-                                   wrapText="true"
-                                   styleClass="detalhes-nome"/>
+                                                 <Label fx:id="lblNome"
+                                                        wrapText="true"
+                                                        styleClass="detalhes-nome" />
 
-                            <Label fx:id="lblPreco"
-                                   styleClass="detalhes-preco"/>
+                                                 <Label fx:id="lblPreco"
+                                                        styleClass="detalhes-preco" />
 
-                            <Separator/>
+                                                 <Separator />
 
-                            <Label text="Descrição do produto"
-                                   styleClass="detalhes-subtitulo"/>
+                                                 <Label text="Descrição do produto"
+                                                        styleClass="detalhes-subtitulo" />
 
-                            <Label fx:id="lblDescricao"
-                                   wrapText="true"
-                                   maxWidth="500"
-                                   styleClass="detalhes-descricao"/>
+                                                 <Label fx:id="lblDescricao"
+                                                        wrapText="true"
+                                                        maxWidth="Infinity"
+                                                        styleClass="detalhes-descricao" />
 
-                            <Button text="Adicionar ao carrinho"
-                                    onAction="#adicionarAoCarrinho"
-                                    maxWidth="Infinity"
-                                    styleClass="detalhes-botao-adicionar"/>
+                                                 <Button text="Adicionar ao carrinho"
+                                                        onAction="#adicionarAoCarrinho"
+                                                        maxWidth="Infinity"
+                                                        styleClass="detalhes-botao-adicionar" />
 
-                            <Label fx:id="lblMensagem"
-                                   wrapText="true"
-                                   styleClass="detalhes-mensagem"/>
+                                                 <Label fx:id="lblMensagem"
+                                                        wrapText="true"
+                                                        styleClass="detalhes-mensagem" />
 
-                        </VBox>
+                                          </VBox>
 
-                    </HBox>
+                                   </HBox>
 
-                </VBox>
+                            </VBox>
 
-            </content>
+                     </content>
 
-        </ScrollPane>
+              </ScrollPane>
 
-    </center>
+       </center>
 
 </BorderPane>

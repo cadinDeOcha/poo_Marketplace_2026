@@ -6,157 +6,173 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Priority?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1">
+    xmlns:fx="http://javafx.com/fxml/1">
 
     <top>
         <HBox alignment="CENTER_LEFT"
-              spacing="20"
-              styleClass="cabecalho">
+            spacing="20"
+            styleClass="cabecalho">
 
             <padding>
-                <Insets top="18" right="35" bottom="18" left="35"/>
+                <Insets top="18" right="35" bottom="18" left="35" />
             </padding>
 
             <Label text="MINI MARKETPLACE"
-                   styleClass="logo"/>
+                styleClass="logo" />
 
-            <HBox HBox.hgrow="ALWAYS"/>
+            <HBox HBox.hgrow="ALWAYS" />
 
             <Button fx:id="lblQuantidadeCarrinho"
-                    text="Carrinho (0)"
-                    styleClass="botao-carrinho"
-                    onAction="#abrirCarrinho"/>
+                text="Carrinho (0)"
+                styleClass="botao-carrinho"
+                onAction="#abrirCarrinho" />
         </HBox>
     </top>
 
     <center>
         <ScrollPane fitToWidth="true"
-                    styleClass="scroll-catalogo">
+            styleClass="scroll-catalogo">
 
             <content>
-                <VBox spacing="22"
-                      styleClass="conteudo-catalogo">
+                <StackPane alignment="TOP_CENTER" styleClass="conteudo-catalogo">
+                    <VBox spacing="22" maxWidth="1200" minWidth="0">
 
-                    <padding>
-                        <Insets top="30" right="35"
-                                bottom="40" left="35"/>
-                    </padding>
+                        <padding>
+                            <Insets top="30" right="35"
+                                bottom="40" left="35" />
+                        </padding>
 
-                    <!-- APRESENTAÇÃO -->
-                    <VBox spacing="6">
-                        <Label text="Encontre seus produtos"
-                               styleClass="titulo"/>
+                        <!-- APRESENTAÇÃO -->
+                        <VBox spacing="6">
+                            <Label text="Encontre seus produtos"
+                                styleClass="titulo" />
 
-                        <Label text="Sua loja de produtos em um só lugar."
-                               styleClass="subtitulo"/>
-                    </VBox>
+                            <Label text="Sua loja de produtos em um só lugar."
+                                styleClass="subtitulo" />
+                        </VBox>
 
-                    <!-- PESQUISA -->
-                    <TextField fx:id="campoPesquisa"
-                               promptText="Pesquisar produtos..."
-                               styleClass="campo-pesquisa"/>
+                        <!-- PESQUISA -->
+                        <TextField fx:id="campoPesquisa"
+                            promptText="Pesquisar produtos..."
+                            styleClass="campo-pesquisa" />
 
-                    <!-- CATEGORIAS -->
-                    <VBox spacing="12">
+                        <!-- CATEGORIAS -->
+                        <VBox spacing="12">
 
-                        <Label text="Categorias"
-                               styleClass="titulo-secao"/>
+                            <Label text="Categorias"
+                                styleClass="titulo-secao" />
 
-                        <HBox spacing="10">
+                            <HBox spacing="10">
 
-                            <Button fx:id="btnTodos"
+                                <Button fx:id="btnTodos"
                                     text="Todos"
                                     onAction="#filtrarTodos"
-                                    styleClass="botao-categoria"/>
+                                    styleClass="botao-categoria" />
 
-                            <Button fx:id="btnEletronicos"
+                                <Button fx:id="btnEletronicos"
                                     text="Eletrônicos"
                                     onAction="#filtrarEletronicos"
-                                    styleClass="botao-categoria"/>
+                                    styleClass="botao-categoria" />
 
-                            <Button fx:id="btnInformatica"
+                                <Button fx:id="btnInformatica"
                                     text="Informática"
                                     onAction="#filtrarInformatica"
-                                    styleClass="botao-categoria"/>
+                                    styleClass="botao-categoria" />
 
-                            <Button fx:id="btnGames"
+                                <Button fx:id="btnGames"
                                     text="Games"
                                     onAction="#filtrarGames"
-                                    styleClass="botao-categoria"/>
+                                    styleClass="botao-categoria" />
 
-                            <Button fx:id="btnAcessorios"
+                                <Button fx:id="btnAcessorios"
                                     text="Acessórios"
                                     onAction="#filtrarAcessorios"
-                                    styleClass="botao-categoria"/>
+                                    styleClass="botao-categoria" />
 
-                        </HBox>
-                    </VBox>
+                            </HBox>
+                        </VBox>
 
-                    <!-- DESTAQUES -->
-                    <VBox spacing="14">
+                        <!-- DESTAQUES -->
+                        <VBox spacing="14">
 
-                        <HBox alignment="CENTER_LEFT"
-                              spacing="12">
+                            <HBox alignment="CENTER_LEFT"
+                                spacing="12">
 
-                            <Label text="Produtos em destaque"
-                                   styleClass="titulo-secao"/>
+                                <Label text="Produtos em destaque"
+                                    styleClass="titulo-secao" />
 
-                            <HBox HBox.hgrow="ALWAYS"/>
+                                <HBox HBox.hgrow="ALWAYS" />
 
-                            <Button text="‹"
+                                <Button text="‹"
                                     onAction="#destaqueAnterior"
-                                    styleClass="botao-carrossel"/>
+                                    styleClass="botao-carrossel" />
 
-                            <Button text="›"
+                                <Button text="›"
                                     onAction="#proximoDestaque"
-                                    styleClass="botao-carrossel"/>
+                                    styleClass="botao-carrossel" />
 
-                        </HBox>
+                            </HBox>
 
-                        <HBox fx:id="painelDestaques"
-                              spacing="18"
-                              alignment="CENTER_LEFT"/>
+                            <GridPane fx:id="painelDestaques" hgap="20" vgap="20" minWidth="0"
+                                maxWidth="Infinity">
+                                <columnConstraints>
+                                    <ColumnConstraints percentWidth="33.333333333333336"
+                                        fillWidth="true" hgrow="ALWAYS" />
+                                    <ColumnConstraints percentWidth="33.333333333333336"
+                                        fillWidth="true" hgrow="ALWAYS" />
+                                    <ColumnConstraints percentWidth="33.333333333333336"
+                                        fillWidth="true" hgrow="ALWAYS" />
+                                </columnConstraints>
+                            </GridPane>
+
+                        </VBox>
+
+                        <!-- TODOS OS PRODUTOS -->
+                        <VBox spacing="14">
+
+                            <HBox alignment="CENTER_LEFT">
+
+                                <Label text="Todos os produtos"
+                                    styleClass="titulo-secao" />
+
+                                <HBox HBox.hgrow="ALWAYS" />
+
+                                <Label fx:id="lblQuantidadeProdutos"
+                                    text="12 produtos encontrados"
+                                    styleClass="texto-quantidade" />
+
+                            </HBox>
+
+                            <Label fx:id="lblEstadoProdutos"
+                                text="Nenhum produto encontrado."
+                                visible="false"
+                                managed="false"
+                                styleClass="mensagem-vazia" />
+
+                            <GridPane fx:id="painelProdutos" hgap="20" vgap="20" minWidth="0"
+                                maxWidth="Infinity">
+                                <columnConstraints>
+                                    <ColumnConstraints percentWidth="33.333333333333336"
+                                        fillWidth="true" hgrow="ALWAYS" />
+                                    <ColumnConstraints percentWidth="33.333333333333336"
+                                        fillWidth="true" hgrow="ALWAYS" />
+                                    <ColumnConstraints percentWidth="33.333333333333336"
+                                        fillWidth="true" hgrow="ALWAYS" />
+                                </columnConstraints>
+                            </GridPane>
+
+                        </VBox>
 
                     </VBox>
-
-                    <!-- TODOS OS PRODUTOS -->
-                    <VBox spacing="14">
-
-                        <HBox alignment="CENTER_LEFT">
-
-                            <Label text="Todos os produtos"
-                                   styleClass="titulo-secao"/>
-
-                            <HBox HBox.hgrow="ALWAYS"/>
-
-                            <Label fx:id="lblQuantidadeProdutos"
-                                   text="12 produtos encontrados"
-                                   styleClass="texto-quantidade"/>
-
-                        </HBox>
-
-                        <Label fx:id="lblEstadoProdutos"
-                               text="Nenhum produto encontrado."
-                               visible="false"
-                               managed="false"
-                               styleClass="mensagem-vazia"/>
-
-                        <FlowPane fx:id="painelProdutos"
-                                  hgap="18"
-                                  vgap="18"
-                                  prefWrapLength="714"
-                                  maxWidth="714"
-                                  alignment="TOP_LEFT"/>
-
-                    </VBox>
-
-                </VBox>
+                </StackPane>
             </content>
 
         </ScrollPane>

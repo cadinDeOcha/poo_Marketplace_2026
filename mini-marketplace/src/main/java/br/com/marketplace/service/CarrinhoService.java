@@ -6,6 +6,7 @@ import br.com.marketplace.model.Produto;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 public class CarrinhoService {
 
@@ -20,28 +21,23 @@ public class CarrinhoService {
 
         if (produto == null) {
             throw new IllegalArgumentException(
-                    "O produto não pode ser nulo."
-            );
+                    "O produto não pode ser nulo.");
         }
 
-        // Verifica se o produto já está no carrinho
-        for (ItemCarrinho item : carrinho.getItens()) {
+        Optional<ItemCarrinho> itemExistente = buscarItemPorId(produto.getId());
 
-            if (item.getProduto().getId() == produto.getId()) {
+        if (itemExistente.isPresent()) {
 
-                // Incrementa a quantidade existente
-                item.alterarQuantidade(
-                        item.getQuantidade() + 1
-                );
+            ItemCarrinho item = itemExistente.get();
 
-                return;
-            }
+            item.alterarQuantidade(
+                    item.getQuantidade() + 1);
+
+        } else {
+
+            carrinho.adicionarItem(
+                    new ItemCarrinho(produto, 1));
         }
-
-        // Se não existir, cria um novo item
-        carrinho.adicionarItem(
-                new ItemCarrinho(produto, 1)
-        );
     }
 
     // Remove um produto pelo ID
@@ -57,22 +53,14 @@ public class CarrinhoService {
 
         if (novaQuantidade <= 0) {
             throw new IllegalArgumentException(
-                    "A quantidade deve ser maior que zero."
-            );
+                    "A quantidade deve ser maior que zero.");
         }
 
-        for (ItemCarrinho item : carrinho.getItens()) {
+        ItemCarrinho item = buscarItemPorId(idProduto)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "Produto não encontrado no carrinho."));
 
-            if (item.getProduto().getId() == idProduto) {
-
-                item.alterarQuantidade(novaQuantidade);
-                return;
-            }
-        }
-
-        throw new IllegalArgumentException(
-                "Produto não encontrado no carrinho."
-        );
+        item.alterarQuantidade(novaQuantidade);
     }
 
     // Retorna os itens do carrinho
@@ -98,5 +86,13 @@ public class CarrinhoService {
     // Limpa o carrinho
     public void limparCarrinho() {
         carrinho.limpar();
+    }
+
+    private Optional<ItemCarrinho> buscarItemPorId(int idProduto) {
+
+        return carrinho.getItens()
+                .stream()
+                .filter(item -> item.getProduto().getId() == idProduto)
+                .findFirst();
     }
 }

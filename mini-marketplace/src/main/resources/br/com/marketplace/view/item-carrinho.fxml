@@ -10,12 +10,13 @@
        xmlns:fx="http://javafx.com/fxml/1"
        fx:controller="br.com.marketplace.controller.ItemCarrinhoController"
        alignment="CENTER_LEFT"
-       spacing="20"
+       spacing="14"
+       maxWidth="Infinity"
        styleClass="item-carrinho">
 
        <padding>
               <Insets top="18"
-                     right="24"
+                     right="18"
                      bottom="18"
                      left="18" />
        </padding>
@@ -53,7 +54,8 @@
 
        <VBox spacing="6"
               alignment="CENTER_LEFT"
-              HBox.hgrow="ALWAYS">
+              HBox.hgrow="ALWAYS"
+              minWidth="0">
 
               <Label fx:id="lblNome"
                      text="Nome do produto"
@@ -79,17 +81,18 @@
 
        <VBox alignment="CENTER"
               spacing="8"
-              minWidth="100">
+              minWidth="112">
 
               <Label text="Quantidade"
                      styleClass="item-carrinho-rotulo" />
 
-              <HBox spacing="10" alignment="CENTER_LEFT">
+              <HBox spacing="6" alignment="CENTER">
 
                      <Button
                             fx:id="btnDiminuir"
                             text="-"
                             onAction="#diminuirQuantidade"
+                            prefWidth="36" prefHeight="36"
                             styleClass="botao-quantidade" />
 
                      <Label
@@ -99,6 +102,7 @@
                      <Button
                             text="+"
                             onAction="#aumentarQuantidade"
+                            prefWidth="36" prefHeight="36"
                             styleClass="botao-quantidade" />
 
               </HBox>
@@ -111,7 +115,7 @@
 
        <VBox alignment="CENTER_RIGHT"
               spacing="8"
-              minWidth="140">
+              minWidth="150">
 
               <Label text="Subtotal"
                      styleClass="item-carrinho-rotulo" />
